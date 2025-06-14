@@ -14,307 +14,207 @@
     <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Google Fonts - Menggunakan Inter dengan beberapa bobot -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* Base styles */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #f0f7ff, #e7eff8); /* Softer, dynamic blue-white gradient */
-            color: #2c3e50; /* Darker, more prominent main text color */
+            /* Lighter, softer gradient */
+            background: linear-gradient(135deg, #f0f8ff, #e6f3f9);
+            color: #334155; /* Darker slate for main text */
             display: flex;
             justify-content: center;
-            align-items: center; /* Center vertically for a clean initial view */
+            align-items: flex-start;
             min-height: 100vh;
             padding: 2rem;
-            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        /* Main Container */
+        /* Container adjustments */
         .container {
-            max-width: 1080px; /* Wider container for more content space */
+            max-width: 1024px; /* Slightly wider */
             width: 100%;
-            background: rgba(255, 255, 255, 0.95); /* Slightly transparent white for a modern feel */
-            border-radius: 1.75rem; /* More rounded corners */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12); /* Deeper, softer shadow */
-            border: 1px solid #e0e7ee; /* Subtle light border */
-            backdrop-filter: blur(3px); /* Subtle blur for modern effect */
-            -webkit-backdrop-filter: blur(3px);
-            padding-bottom: 2rem; /* Consistent padding at bottom */
+            /* Removed padding from here as it's added to individual sections */
         }
 
-        /* Section Styling (Form & Output) */
-        .card-section {
-            background: linear-gradient(to bottom right, #ffffff, #fcfdff); /* Light gradient for sections */
+        /* Form section */
+        .form-section {
+            background: linear-gradient(to bottom right, #ffffff, #f9fbfd); /* More dynamic gradient */
             border-radius: 1.5rem;
-            padding: 2.5rem;
-            margin: 1.5rem 2rem; /* Add margin to separate from container edges */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); /* Lighter shadow for inner cards */
-            border: 1px solid #edf2f7; /* Very light border */
-            transition: all 0.3s ease-in-out;
-        }
-        .card-section:hover {
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08); /* Slight lift on hover */
+            padding: 2.5rem; /* Increased padding */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+            border: 1px solid #e2e8f0; /* Subtle border */
         }
 
         /* Tooltip info */
-        .tooltip-container {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-        }
         .tooltip-icon {
-            display: inline-flex;
+            display: inline-flex; /* Use flex for centering '?' */
             align-items: center;
             justify-content: center;
-            width: 22px; /* Slightly smaller, more refined */
-            height: 22px;
-            background-color: #5a7bd2; /* Calmer blue */
+            width: 24px; /* Slightly larger */
+            height: 24px;
+            background-color: #4361EE; /* Primary blue */
             color: white;
-            font-size: 13px;
+            font-size: 14px; /* Slightly larger font */
             border-radius: 50%;
             cursor: pointer;
             margin-left: 8px;
-            transition: background-color 0.3s ease;
-        }
-        .tooltip-icon:hover {
-            background-color: #435cac; /* Darker on hover */
+            position: relative; /* For tooltip text positioning */
         }
 
         .tooltip-text {
             visibility: hidden;
-            width: 280px;
-            background: #1f2937; /* Dark slate */
+            width: 280px; /* Wider tooltip */
+            background: #1a202c; /* Darker background for contrast */
             color: #fff;
             text-align: center;
-            border-radius: 8px;
-            padding: 10px;
+            border-radius: 8px; /* More rounded */
+            padding: 10px; /* Increased padding */
             position: absolute;
             z-index: 10;
             bottom: 125%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%); /* Centered horizontally */
             opacity: 0;
             transition: opacity 0.3s, transform 0.3s;
-            font-size: 0.8rem;
-            white-space: normal; /* Allow text wrapping */
+            font-size: 13px;
         }
 
-        .tooltip-icon:hover + .tooltip-text {
+        .tooltip-icon:hover .tooltip-text { /* Change selector to target child */
             visibility: visible;
             opacity: 1;
-            transform: translateX(-50%) translateY(-5px);
+            transform: translateX(-50%) translateY(-5px); /* Slight lift on hover */
         }
 
-        /* Button Styling */
+        /* Tombol styling */
         .btn {
-            @apply px-8 py-3.5 rounded-2xl font-bold transition-all duration-300 ease-in-out transform;
-            font-size: 1.1rem; /* Slightly larger font */
-        }
-
-        .btn:hover {
-            @apply scale-105;
-        }
-        .btn:active {
-            @apply scale-98; /* Subtle press effect */
+            @apply px-7 py-3 rounded-xl font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-opacity-75 text-lg; /* Increased padding and font size */
         }
 
         .btn-primary {
-            @apply bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg hover:from-blue-700 hover:to-indigo-800 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75;
+            @apply bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-xl hover:from-blue-700 hover:to-indigo-800 focus:ring-blue-400; /* Stronger shadow, deeper gradient on hover */
         }
 
         .btn-secondary {
-            @apply bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 focus:ring-opacity-75;
+            @apply bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 focus:ring-gray-300;
         }
 
         .btn-outline {
-            @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75;
-        }
-
-        /* Input Field Styling */
-        input[type="text"],
-        input[type="password"],
-        input[type="file"],
-        textarea {
-            @apply px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg;
-            transition: all 0.3s ease;
-        }
-        input[type="file"] {
-            @apply cursor-pointer bg-white file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-base file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200;
+            @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-300; /* Thicker border */
         }
 
         /* MessageBox */
-        .message-box-wrapper {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 100;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-            pointer-events: none; /* Allows clicks through when hidden */
-        }
-        .message-box-wrapper.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto; /* Re-enable clicks when visible */
-        }
-
         .message-box {
-            @apply p-4 rounded-xl shadow-xl text-white flex items-center space-x-3;
-            min-width: 280px;
+            @apply fixed bottom-6 right-6 p-4 rounded-xl shadow-xl text-white z-50 transition-all duration-300 ease-in-out transform flex items-center space-x-3; /* Added flex for icon and text */
         }
 
-        .message-box.success { @apply bg-green-600; }
-        .message-box.error { @apply bg-red-600; }
-        .message-box.warning { @apply bg-yellow-600; }
-        .message-box.info { @apply bg-blue-600; }
+        .message-box.success {
+            @apply bg-green-600; /* Darker green */
+        }
 
-        .message-box .close-btn {
-            @apply text-white ml-auto cursor-pointer hover:text-gray-200 transition-colors;
+        .message-box.error {
+            @apply bg-red-600; /* Darker red */
+        }
+
+        .message-box.warning {
+            @apply bg-yellow-600; /* Darker yellow */
+        }
+
+        .message-box.hidden {
+            opacity: 0;
+            transform: translateY(30px); /* More noticeable slide out */
+            pointer-events: none;
         }
 
         /* Modal styling */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(17, 24, 39, 0.75); /* Darker, more prominent overlay */
-            backdrop-filter: blur(8px); /* Frosted glass effect */
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            opacity: 0;
-            transition: opacity 0.3s ease-out;
-        }
-        .modal-overlay.visible {
-            opacity: 1;
-        }
-
         .modal-content {
-            background: linear-gradient(to top left, #ffffff, #fcfdff); /* Soft white gradient */
-            padding: 2.5rem; /* More padding */
-            border-radius: 2rem; /* Very rounded */
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); /* Deep shadow */
+            animation: slideIn 0.5s ease-out forwards; /* Slower animation */
+            background: linear-gradient(to top left, #ffffff, #fdfdfe); /* Subtle gradient */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow */
             border: 1px solid #dbeafe;
-            width: 100%;
-            max-width: 500px; /* Slightly wider modal */
-            margin: 0 1rem;
-            transform: translateY(-30px); /* Initial offset for animation */
-            opacity: 0;
-            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
-        }
-        .modal-overlay.visible .modal-content {
-            transform: translateY(0);
-            opacity: 1;
         }
 
-        .modal-header-icon {
-            @apply absolute -top-8 -right-8 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-full p-5 shadow-lg flex items-center justify-center text-white; /* Larger, more prominent icon bubble */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Scrollbar */
         #readmeRaw::-webkit-scrollbar,
         #readmePreview::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 8px; /* Thinner scrollbar */
         }
         #readmeRaw::-webkit-scrollbar-thumb,
         #readmePreview::-webkit-scrollbar-thumb {
-            background-color: #6a8cd2; /* Calmer blue for scrollbar */
+            background-color: #4361EE; /* Primary blue for scrollbar */
             border-radius: 10px;
-            border: 2px solid transparent; /* No border, let thumb fill area */
+            border: 2px solid #f0f8ff; /* Border matches body background */
         }
         #readmeRaw::-webkit-scrollbar-track,
         #readmePreview::-webkit-scrollbar-track {
-            background: #e9eff6; /* Lighter track */
+            background: #e2e8f0; /* Light gray track */
             border-radius: 10px;
         }
 
         /* Loading spinner */
-        .loading-spinner-container {
-            @apply flex items-center justify-center mt-8 p-6 bg-blue-50 rounded-xl text-blue-700 font-semibold border border-blue-200 shadow-md;
-            transition: all 0.3s ease-in-out;
-        }
         .loading-spinner {
-            width: 40px; /* Larger spinner */
-            height: 40px;
-            border: 4px solid rgba(100, 149, 237, 0.2); /* Light blue border */
-            border-top-color: #4169E1; /* Royal blue for top part */
+            border: 5px solid rgba(0, 0, 0, 0.1); /* Thicker border */
+            border-left-color: #4361EE; /* Primary blue */
             border-radius: 50%;
-            animation: spin 0.8s linear infinite; /* Faster spin */
-            margin-right: 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            width: 35px; /* Larger spinner */
+            height: 35px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.75rem;
         }
 
         /* Tab styling */
-        .tab-controls {
-            @apply flex justify-center bg-gray-50 border-b border-gray-200 rounded-t-2xl;
-        }
-        .tab-btn {
-            @apply px-7 py-4 font-bold text-base cursor-pointer relative transition-all duration-300 ease-in-out;
-            color: #64748B;
-            border-bottom: 3px solid transparent; /* For underline effect */
-            margin-bottom: -1px; /* Overlap border-bottom of controls */
+        .tab {
+            @apply px-8 py-4 font-bold text-base rounded-tl-lg rounded-tr-lg cursor-pointer transition-all duration-200; /* Larger, bolder tabs */
+            border: 1px solid transparent; /* default transparent border */
+            border-bottom: none; /* remove bottom border by default */
+            background-color: #f8fafc; /* light background for inactive */
+            color: #64748B; /* slate gray for inactive */
         }
 
-        .tab-btn.active {
-            @apply text-blue-700;
-            border-bottom-color: #4361EE; /* Active tab underline */
+        .tab.active {
+            @apply bg-blue-600 text-white shadow-lg; /* Stronger active state */
+            border-color: #blue-600; /* Active tab border */
+            position: relative;
+            z-index: 1; /* Bring active tab to front */
         }
 
-        .tab-content-wrapper {
-            border: 1px solid #e0e7ee; /* Border around content wrapper */
-            border-top: none; /* No top border, tabs handle it */
-            border-bottom-left-radius: 1.5rem;
-            border-bottom-right-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-            background-color: #ffffff;
+        /* Adjust tab content border to align with active tab */
+        #readmeTabsContainer { /* Changed from #readmeTabs to #readmeTabsContainer as per HTML structure */
+            border-top: none; /* remove default top border */
+        }
+        .tab-content {
+            @apply hidden p-8 border border-gray-300 rounded-b-xl rounded-tr-xl; /* More rounded, consistent borders */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03); /* subtle inner shadow */
         }
 
-        .tab-panel {
-            @apply hidden p-6; /* Reduced padding slightly from 8 to 6 */
-        }
-
-        .tab-panel.active {
+        .tab-content.active {
             @apply block;
-        }
-
-        /* Code Mirror styling imitation for raw readme */
-        #readmeRaw {
-            background-color: #1e1e1e; /* Dark background for code */
-            color: #d4d4d4; /* Light text for code */
-            border: none;
-            outline: none;
-            padding: 1.5rem; /* More padding */
-            line-height: 1.5; /* Better line spacing */
-            font-size: 0.95rem; /* Slightly larger font */
-            border-radius: 0.75rem; /* Rounded corners for text area */
-            height: 400px; /* Fixed height for consistency */
         }
 
         /* Markdown preview styling with Tailwind Prose */
         #readmePreview {
-            @apply prose prose-lg max-w-none text-gray-800 leading-relaxed;
+            @apply prose prose-lg max-w-none text-gray-800 leading-relaxed; /* Larger prose, relaxed line-height */
+            /* Customizing prose elements */
         }
         #readmePreview h1, #readmePreview h2, #readmePreview h3, #readmePreview h4, #readmePreview h5, #readmePreview h6 {
-            @apply text-blue-800 font-extrabold;
+            @apply text-blue-800 font-extrabold; /* Blue headings */
         }
         #readmePreview a {
             @apply text-blue-600 hover:underline;
         }
         #readmePreview code {
-            @apply bg-blue-50 text-blue-700 rounded px-1.5 py-0.5 font-mono; /* More padding, monospaced */
+            @apply bg-blue-50 text-blue-700 rounded px-1 py-0.5;
         }
         #readmePreview pre {
-            @apply bg-gray-900 text-white rounded-lg p-4 overflow-x-auto shadow-inner; /* Darker pre, inner shadow */
+            @apply bg-gray-800 text-white rounded-lg p-4 overflow-x-auto;
         }
         #readmePreview ul {
             @apply list-disc list-inside;
@@ -323,67 +223,53 @@
             @apply list-decimal list-inside;
         }
         #readmePreview blockquote {
-            @apply border-l-4 border-blue-400 pl-4 italic text-gray-600;
+            @apply border-l-4 border-blue-300 pl-4 italic text-gray-600;
         }
+
 
         @media (max-width: 768px) {
             body {
-                padding: 1rem;
+                padding: 1rem; /* Less padding on smaller screens */
                 align-items: flex-start; /* Align to top on small screens */
             }
             .container {
-                padding: 0; /* Remove container padding, sections will have it */
-                border-radius: 1rem;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-            .card-section {
-                padding: 1.5rem;
-                margin: 1rem;
-                border-radius: 1rem;
+                padding: 1rem;
             }
             .grid-cols-2 {
                 grid-template-columns: 1fr;
             }
+            .form-section {
+                padding: 1.5rem; /* Smaller padding for form on mobile */
+            }
             .btn {
-                @apply text-base px-6 py-3;
+                @apply text-base px-5 py-2.5; /* Smaller buttons on mobile */
             }
-            .tab-btn {
-                @apply px-4 py-3 text-sm;
+            .tab {
+                @apply px-4 py-3 text-sm; /* Smaller tabs on mobile */
             }
-            .tab-panel {
-                @apply p-4;
+            .tab-content {
+                @apply p-4; /* Smaller padding for tab content */
             }
-            .modal-content {
-                padding: 1.5rem;
-                border-radius: 1.5rem;
-            }
-            .modal-header-icon {
-                @apply -top-6 -right-6 p-4 text-2xl;
-            }
-            .message-box-wrapper {
+            .message-box {
                 bottom: 1rem;
-                right: 0.5rem;
-                left: 0.5rem;
+                right: 1rem;
+                left: 1rem; /* Full width on mobile */
                 width: auto;
-            }
-            #readmeRaw {
-                height: 300px; /* Shorter on mobile */
-                padding: 1rem;
             }
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 p-8">
 
 <!-- Modal Pengaturan API -->
-<div id="apiSettingsModal" class="modal-overlay hidden">
-    <div class="modal-content">
+<div id="apiSettingsModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
+    <div class="modal-content bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md mx-4 transform border border-blue-300 relative">
         <!-- Iconic Header -->
-        <div class="modal-header-icon">
+        <div class="absolute -top-6 -right-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full p-4 shadow-lg flex items-center justify-center">
             <i class="fas fa-key text-white text-3xl"></i>
         </div>
         <h2 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">🔐 Pengaturan Kunci API</h2>
-        <p class="text-gray-600 text-center mb-6">Masukkan kunci API yang diperlukan untuk menggunakan aplikasi ini.</p>
+        <p class="text-gray-600 text-center mb-6">Masukkan kunci API untuk memulai.</p>
 
         <div class="space-y-5">
             <div class="input-group">
@@ -392,7 +278,7 @@
                     <span class="ml-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">PENTING</span>
                 </label>
                 <input type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxx"
-                       class="w-full">
+                       class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base">
             </div>
 
             <div class="input-group">
@@ -400,7 +286,7 @@
                     Kunci API Gemini: <span class="text-red-500">*</span>
                 </label>
                 <input type="password" id="geminiApiKeyInput" placeholder="AIzaSyBxxxxxxxxxxxxxxxxxxxxx"
-                       class="w-full">
+                       class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base">
                 <p id="geminiApiKeyError" class="text-red-500 text-sm mt-1 hidden">Kunci API Gemini wajib diisi!</p>
             </div>
         </div>
@@ -417,35 +303,41 @@
 </div>
 
 <!-- Konten Utama -->
-<div id="mainContent" class="container hidden">
-    <header class="text-center pt-8 px-8 mb-6">
+<div id="mainContent" class="container mx-auto bg-white rounded-2xl shadow-2xl space-y-8 border border-gray-200 hidden">
+    <header class="text-center pt-8 px-8">
         <h1 class="text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">AI README.md Generator ✨</h1>
-        <p class="text-xl text-gray-600">Hasilkan file <code class="bg-gray-100 text-blue-700 px-2 py-1 rounded-md font-mono font-bold">README.md</code> dengan cepat dan otomatis 🚀</p>
+        <p class="text-xl text-gray-600 mb-6">Hasilkan file <code class="bg-gray-100 text-blue-700 px-2 py-1 rounded-md font-mono font-bold">README.md</code> dengan cepat dan otomatis 🚀</p>
     </header>
 
-    <!-- Form Input Section -->
-    <section class="card-section space-y-6">
+    <!-- Form Input -->
+    <section class="form-section space-y-6">
         <h2 class="text-3xl font-bold text-gray-800 mb-4">Detail Proyek Anda 📝</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <!-- Increased gap -->
             <!-- URL Repositori -->
-            <div class="md:col-span-2 input-group">
-                <label for="repoUrl" class="block text-lg font-medium text-gray-700 mb-2">
-                    URL Repositori GitHub:
-                    <span class="tooltip-container">
-                        <span class="tooltip-icon">?</span>
+            <div class="md:col-span-2 input-group relative">
+                <label for="repoUrl" class="block text-lg font-medium text-gray-700 mb-2">URL Repositori GitHub:
+                    <span class="tooltip-icon">?
                         <span class="tooltip-text">Masukkan URL lengkap seperti https://github.com/username/nama-repo</span>
                     </span>
                 </label>
                 <input type="text" id="repoUrl" placeholder="Contoh: https://github.com/octocat/Spoon-Knife"
-                       class="w-full">
-                <p id="repoUrlError" class="text-red-500 text-sm mt-1 hidden">URL repositori tidak valid 🤔</p>
+                       class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg">
+                <p id="repoUrlError" class="text-red-500 text-sm mt-1 hidden">URL tidak valid 🤔</p>
+            </div>
+
+            <!-- Tombol Generate -->
+            <div class="md:col-span-2 mt-4"> <!-- Increased top margin -->
+                <button id="generateBtn" class="btn btn-primary w-full text-xl">
+                    <i class="fas fa-magic mr-2"></i> Generate README
+                </button>
             </div>
 
             <!-- Unggah Gambar -->
             <div class="input-group">
                 <label for="imageUpload" class="block text-lg font-medium text-gray-700 mb-2">Unggah Gambar (Opsional):</label>
-                <input type="file" id="imageUpload" accept="image/*" class="w-full">
+                <input type="file" id="imageUpload" accept="image/*"
+                       class="mt-1 block w-full text-lg text-gray-900 border border-gray-300 rounded-xl cursor-pointer bg-white focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                 <p class="text-sm text-gray-500 mt-2">Gambar akan membantu AI memahami konteks proyek. 🖼️</p>
             </div>
 
@@ -453,52 +345,45 @@
             <div class="input-group">
                 <label for="contextTags" class="block text-lg font-medium text-gray-700 mb-2">Tag Konteks Tambahan (Opsional):</label>
                 <input type="text" id="contextTags" placeholder="web dev, machine learning, API"
-                       class="w-full">
+                       class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg">
                 <p class="text-sm text-gray-500 mt-2">Gunakan tag untuk bantuan penjelasan tambahan 💡</p>
             </div>
-        </div>
-
-        <!-- Tombol Generate -->
-        <div class="mt-8">
-            <button id="generateBtn" class="btn btn-primary w-full">
-                <i class="fas fa-magic mr-2"></i> Hasilkan README
-            </button>
         </div>
     </section>
 
     <!-- Indikator Loading -->
-    <div id="loadingIndicator" class="loading-spinner-container hidden">
+    <div id="loadingIndicator" class="hidden text-center mt-8 p-6 bg-blue-50 rounded-xl text-blue-700 font-semibold border border-blue-200 shadow-md">
         <span class="loading-spinner"></span> Sedang membuat README.md... Mohon tunggu ✨
     </div>
 
     <!-- Output Section -->
-    <section id="outputSection" class="card-section hidden">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Hasil README.md Anda 🎉</h2>
+    <section id="outputSection" class="hidden mt-10 p-0 bg-gray-50 rounded-2xl shadow-inner border border-gray-100 overflow-hidden">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center pt-6">Hasil README.md Anda 🎉</h2>
 
         <!-- Tab Navigation -->
-        <div class="tab-controls">
-            <button class="tab-btn active" data-tab-target="codeTab">📝 Kode</button>
-            <button class="tab-btn" data-tab-target="previewTab">👁️ Preview</button>
+        <div class="flex justify-center border-b border-gray-300 bg-gray-100 rounded-t-2xl">
+            <button class="tab active" data-tab-target="codeTab">📝 Kode</button>
+            <button class="tab" data-tab-target="previewTab">👁️ Preview</button>
         </div>
 
         <!-- Tab Content -->
-        <div class="tab-content-wrapper">
-            <div id="codeTab" class="tab-panel active">
-                <textarea id="readmeRaw" readonly></textarea>
-                <div class="flex justify-end pt-4">
+        <div id="readmeTabsContainer" class="rounded-bl-xl rounded-br-xl overflow-hidden">
+            <div id="codeTab" class="tab-content active">
+                <textarea id="readmeRaw" rows="18" readonly class="w-full p-4 border-none outline-none rounded-lg bg-gray-900 text-gray-100 font-mono text-sm resize-y shadow-inner"></textarea>
+                <div class="flex justify-end p-4"> <!-- Align button to the right -->
                     <button id="copyBtn" class="btn btn-secondary text-base">
                         <i class="fas fa-copy mr-2"></i> Salin Kode
                     </button>
                 </div>
             </div>
-            <div id="previewTab" class="tab-panel">
-                <div id="readmePreview" class="prose"></div>
+            <div id="previewTab" class="tab-content">
+                <div id="readmePreview" class="w-full p-4 prose prose-blue max-w-none text-gray-800"></div>
             </div>
         </div>
     </section>
 
     <!-- Tombol Pengaturan API -->
-    <div class="text-center py-6">
+    <div class="text-center py-8"> <!-- Added padding for spacing -->
         <button id="apiSettingsBtn" class="btn btn-outline">
             <i class="fas fa-cog mr-2"></i> Ubah Pengaturan API
         </button>
@@ -506,12 +391,7 @@
 </div>
 
 <!-- Message Box -->
-<div id="messageBoxWrapper" class="message-box-wrapper">
-    <div id="messageBox" class="message-box">
-        <!-- Message content will be inserted here by JS -->
-        <button class="close-btn hidden" id="closeMessageBoxBtn"><i class="fas fa-times"></i></button>
-    </div>
-</div>
+<div id="messageBox" class="message-box hidden"></div>
 
 <script>
     // Set marked.js options for GitHub Flavored Markdown
@@ -536,11 +416,9 @@
     const githubTokenInput = document.getElementById('githubTokenInput');
     const geminiApiKeyInput = document.getElementById('geminiApiKeyInput');
     const geminiApiKeyError = document.getElementById('geminiApiKeyError');
-    const messageBoxWrapper = document.getElementById('messageBoxWrapper');
     const messageBox = document.getElementById('messageBox');
-    const closeMessageBoxBtn = document.getElementById('closeMessageBoxBtn');
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
 
     // Variables to store API keys
     let githubToken = '';
@@ -550,43 +428,31 @@
      * Displays a temporary message box with a given message and type.
      * @param {string} message - The message to display.
      * @param {'info'|'success'|'error'|'warning'} [type='info'] - The type of message (determines color).
-     * @param {boolean} [dismissible=false] - If true, a close button will be shown.
      */
-    function showMessage(message, type = 'info', dismissible = false) {
-        // Reset classes and content
-        messageBox.className = 'message-box'; // Reset to base class
-        messageBox.innerHTML = ''; // Clear existing text/icon
+    function showMessage(message, type = 'info') {
+        // Clear previous classes and content
+        messageBox.className = 'message-box hidden'; // Reset to base and hidden first
+        messageBox.textContent = ''; // Clear existing text
 
         // Add icon based on message type
         let iconHtml = '';
         if (type === 'success') {
-            iconHtml = '<i class="fas fa-check-circle mr-2"></i>';
+            iconHtml = '<i class="fas fa-check-circle"></i> ';
         } else if (type === 'error') {
-            iconHtml = '<i class="fas fa-times-circle mr-2"></i>';
+            iconHtml = '<i class="fas fa-times-circle"></i> ';
         } else if (type === 'warning') {
-            iconHtml = '<i class="fas fa-exclamation-triangle mr-2"></i>';
+            iconHtml = '<i class="fas fa-exclamation-triangle"></i> ';
         } else {
-            iconHtml = '<i class="fas fa-info-circle mr-2"></i>';
+            iconHtml = '<i class="fas fa-info-circle"></i> ';
         }
 
         // Set content and classes
         messageBox.innerHTML = iconHtml + message;
         messageBox.classList.add(type);
+        messageBox.classList.remove('hidden');
 
-        // Show/hide close button
-        if (dismissible) {
-            closeMessageBoxBtn.classList.remove('hidden');
-        } else {
-            closeMessageBoxBtn.classList.add('hidden');
-        }
-
-        // Make message box visible with animation
-        messageBoxWrapper.classList.add('visible');
-
-        // Hide message automatically after 3 seconds if not dismissible
-        if (!dismissible) {
-            setTimeout(() => messageBoxWrapper.classList.remove('visible'), 3000);
-        }
+        // Hide message after 3 seconds
+        setTimeout(() => messageBox.classList.add('hidden'), 3000);
     }
 
     /**
@@ -609,7 +475,7 @@
         // Validate Gemini API key
         if (!geminiApiKey) {
             geminiApiKeyError.classList.remove('hidden');
-            showMessage('Kunci API Gemini wajib diisi!', 'error', true); // Make error dismissible
+            showMessage('Kunci API Gemini wajib diisi!', 'error');
             return;
         } else {
             geminiApiKeyError.classList.add('hidden');
@@ -617,7 +483,7 @@
 
         localStorage.setItem('githubToken', githubToken);
         localStorage.setItem('geminiApiKey', geminiApiKey);
-        apiSettingsModal.classList.remove('visible'); // Hide modal with animation
+        apiSettingsModal.classList.add('hidden');
         mainContent.classList.remove('hidden'); // Show main content once keys are saved
         showMessage('Token berhasil disimpan! ✅', 'success');
     }
@@ -642,8 +508,8 @@
 
         // Check if Gemini API key is available
         if (!geminiApiKey) {
-            showMessage('Kunci API Gemini tidak ditemukan. Silakan atur di Pengaturan API.', 'error', true);
-            apiSettingsModal.classList.add('visible'); // Show modal with animation
+            showMessage('Kunci API Gemini tidak ditemukan. Silakan atur di Pengaturan API.', 'error');
+            apiSettingsModal.classList.remove('hidden');
             mainContent.classList.add('hidden');
             return;
         }
@@ -667,6 +533,7 @@
             const githubResponse = await fetch(githubApiUrl, { headers });
 
             if (!githubResponse.ok) {
+                // Handle specific GitHub API errors (e.g., rate limit, not found)
                 if (githubResponse.status === 404) {
                     throw new Error("Repositori GitHub tidak ditemukan. Periksa URL Anda.");
                 } else if (githubResponse.status === 403) {
@@ -685,9 +552,11 @@
                 const reader = new FileReader();
                 reader.readAsDataURL(imageFile);
 
+                // Wait for FileReader to complete
                 await new Promise(resolve => reader.onloadend = resolve);
                 const base64ImageData = reader.result.split(',')[1];
 
+                // Prepare payload for image understanding with Gemini API
                 const payloadImage = {
                     contents: [{
                         role: "user",
@@ -755,7 +624,7 @@
 
             const payload = {
                 contents: [{ role: "user", parts: [{ text: prompt }] }],
-                generationConfig: { temperature: 0.7, maxOutputTokens: 2000 }
+                generationConfig: { temperature: 0.7, maxOutputTokens: 2000 } // Adjust temperature for creativity/consistency
             };
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`;
 
@@ -779,11 +648,11 @@
                 switchTab('previewTab');
 
             } else {
-                showMessage('Gagal menghasilkan README.md. Respons AI tidak valid. 😔', 'error', true);
+                showMessage('Gagal menghasilkan README.md. Respons AI tidak valid. 😔', 'error');
             }
         } catch (error) {
             console.error('Kesalahan:', error);
-            showMessage(`Terjadi kesalahan: ${error.message}. Coba lagi nanti. 🙁`, 'error', true);
+            showMessage(`Terjadi kesalahan: ${error.message}. Coba lagi nanti. 🙁`, 'error');
         } finally {
             loadingIndicator.classList.add('hidden');
             generateBtn.disabled = false;
@@ -804,19 +673,19 @@
      * @param {string} targetId - The ID of the tab content to show (e.g., 'codeTab', 'previewTab').
      */
     function switchTab(targetId) {
-        tabButtons.forEach(button => {
-            if (button.dataset.tabTarget === targetId) {
-                button.classList.add('active');
+        tabs.forEach(tab => {
+            if (tab.dataset.tabTarget === targetId) {
+                tab.classList.add('active');
             } else {
-                button.classList.remove('active');
+                tab.classList.remove('active');
             }
         });
 
-        tabPanels.forEach(panel => {
-            if (panel.id === targetId) {
-                panel.classList.add('active');
+        tabContents.forEach(content => {
+            if (content.id === targetId) {
+                content.classList.add('active');
             } else {
-                panel.classList.remove('active');
+                content.classList.remove('active');
             }
         });
     }
@@ -826,30 +695,26 @@
     copyBtn.addEventListener('click', copyToClipboard);
 
     apiSettingsBtn.addEventListener('click', () => {
-        apiSettingsModal.classList.add('visible'); // Show modal with animation
+        apiSettingsModal.classList.remove('hidden');
         mainContent.classList.add('hidden');
     });
 
     saveApiTokensBtn.addEventListener('click', saveTokens);
 
     closeModalBtn.addEventListener('click', () => {
-        apiSettingsModal.classList.remove('visible'); // Hide modal with animation
+        apiSettingsModal.classList.add('hidden');
         // Only show main content if Gemini API key is already set
         if (geminiApiKey) {
             mainContent.classList.remove('hidden');
         } else {
-            showMessage('Kunci API Gemini diperlukan untuk menggunakan aplikasi.', 'warning', true);
+            showMessage('Kunci API Gemini diperlukan untuk menggunakan aplikasi.', 'warning');
         }
     });
 
-    closeMessageBoxBtn.addEventListener('click', () => {
-        messageBoxWrapper.classList.remove('visible'); // Hide message box
-    });
-
     // Tab switching event listener
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            switchTab(button.dataset.tabTarget);
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            switchTab(tab.dataset.tabTarget);
         });
     });
 
@@ -859,11 +724,11 @@
 
         // If no Gemini API key is found, show the settings modal first
         if (!localStorage.getItem('geminiApiKey')) {
-            apiSettingsModal.classList.add('visible'); // Show modal with animation
+            apiSettingsModal.classList.remove('hidden');
             mainContent.classList.add('hidden');
         } else {
             // Otherwise, hide the modal and show the main content
-            apiSettingsModal.classList.remove('visible');
+            apiSettingsModal.classList.add('hidden');
             mainContent.classList.remove('hidden');
         }
     });
