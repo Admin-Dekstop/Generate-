@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI README.md Generator ✨</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Marked.js untuk render Markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-    <!-- Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
@@ -235,11 +231,15 @@
             .container {
                 padding: 1rem;
             }
-            .grid-cols-2 {
+            /* Remove grid-cols-2 from here for smaller screens to make it stack */
+            .form-section > div {
                 grid-template-columns: 1fr;
             }
-            .form-section {
-                padding: 1.5rem; /* Smaller padding for form on mobile */
+            .form-section .input-group:nth-child(1) { /* Target URL Repositori */
+                margin-bottom: 1rem; /* Add some space below URL input */
+            }
+            .form-section .md\:col-span-2 {
+                grid-column: span 1 / span 1; /* Override md:col-span-2 on small screens */
             }
             .btn {
                 @apply text-base px-5 py-2.5; /* Smaller buttons on mobile */
@@ -261,10 +261,8 @@
 </head>
 <body class="bg-gray-100 p-8">
 
-<!-- Modal Pengaturan API -->
 <div id="apiSettingsModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
     <div class="modal-content bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md mx-4 transform border border-blue-300 relative">
-        <!-- Iconic Header -->
         <div class="absolute -top-6 -right-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full p-4 shadow-lg flex items-center justify-center">
             <i class="fas fa-key text-white text-3xl"></i>
         </div>
@@ -302,20 +300,17 @@
     </div>
 </div>
 
-<!-- Konten Utama -->
 <div id="mainContent" class="container mx-auto bg-white rounded-2xl shadow-2xl space-y-8 border border-gray-200 hidden">
     <header class="text-center pt-8 px-8">
         <h1 class="text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">AI README.md Generator ✨</h1>
         <p class="text-xl text-gray-600 mb-6">Hasilkan file <code class="bg-gray-100 text-blue-700 px-2 py-1 rounded-md font-mono font-bold">README.md</code> dengan cepat dan otomatis 🚀</p>
     </header>
 
-    <!-- Form Input -->
     <section class="form-section space-y-6">
         <h2 class="text-3xl font-bold text-gray-800 mb-4">Detail Proyek Anda 📝</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <!-- Increased gap -->
-            <!-- URL Repositori -->
-            <div class="md:col-span-2 input-group relative">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="input-group relative">
                 <label for="repoUrl" class="block text-lg font-medium text-gray-700 mb-2">URL Repositori GitHub:
                     <span class="tooltip-icon">?
                         <span class="tooltip-text">Masukkan URL lengkap seperti https://github.com/username/nama-repo</span>
@@ -326,14 +321,11 @@
                 <p id="repoUrlError" class="text-red-500 text-sm mt-1 hidden">URL tidak valid 🤔</p>
             </div>
 
-            <!-- Tombol Generate -->
-            <div class="md:col-span-2 mt-4"> <!-- Increased top margin -->
-                <button id="generateBtn" class="btn btn-primary w-full text-xl">
+            <div class="input-group md:mt-0 mt-4 flex items-end"> <button id="generateBtn" class="btn btn-primary w-full text-xl">
                     <i class="fas fa-magic mr-2"></i> Generate README
                 </button>
             </div>
 
-            <!-- Unggah Gambar -->
             <div class="input-group">
                 <label for="imageUpload" class="block text-lg font-medium text-gray-700 mb-2">Unggah Gambar (Opsional):</label>
                 <input type="file" id="imageUpload" accept="image/*"
@@ -341,7 +333,6 @@
                 <p class="text-sm text-gray-500 mt-2">Gambar akan membantu AI memahami konteks proyek. 🖼️</p>
             </div>
 
-            <!-- Tag Konteks -->
             <div class="input-group">
                 <label for="contextTags" class="block text-lg font-medium text-gray-700 mb-2">Tag Konteks Tambahan (Opsional):</label>
                 <input type="text" id="contextTags" placeholder="web dev, machine learning, API"
@@ -351,27 +342,22 @@
         </div>
     </section>
 
-    <!-- Indikator Loading -->
     <div id="loadingIndicator" class="hidden text-center mt-8 p-6 bg-blue-50 rounded-xl text-blue-700 font-semibold border border-blue-200 shadow-md">
         <span class="loading-spinner"></span> Sedang membuat README.md... Mohon tunggu ✨
     </div>
 
-    <!-- Output Section -->
     <section id="outputSection" class="hidden mt-10 p-0 bg-gray-50 rounded-2xl shadow-inner border border-gray-100 overflow-hidden">
         <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center pt-6">Hasil README.md Anda 🎉</h2>
 
-        <!-- Tab Navigation -->
         <div class="flex justify-center border-b border-gray-300 bg-gray-100 rounded-t-2xl">
             <button class="tab active" data-tab-target="codeTab">📝 Kode</button>
             <button class="tab" data-tab-target="previewTab">👁️ Preview</button>
         </div>
 
-        <!-- Tab Content -->
         <div id="readmeTabsContainer" class="rounded-bl-xl rounded-br-xl overflow-hidden">
             <div id="codeTab" class="tab-content active">
                 <textarea id="readmeRaw" rows="18" readonly class="w-full p-4 border-none outline-none rounded-lg bg-gray-900 text-gray-100 font-mono text-sm resize-y shadow-inner"></textarea>
-                <div class="flex justify-end p-4"> <!-- Align button to the right -->
-                    <button id="copyBtn" class="btn btn-secondary text-base">
+                <div class="flex justify-end p-4"> <button id="copyBtn" class="btn btn-secondary text-base">
                         <i class="fas fa-copy mr-2"></i> Salin Kode
                     </button>
                 </div>
@@ -382,15 +368,12 @@
         </div>
     </section>
 
-    <!-- Tombol Pengaturan API -->
-    <div class="text-center py-8"> <!-- Added padding for spacing -->
-        <button id="apiSettingsBtn" class="btn btn-outline">
+    <div class="text-center py-8"> <button id="apiSettingsBtn" class="btn btn-outline">
             <i class="fas fa-cog mr-2"></i> Ubah Pengaturan API
         </button>
     </div>
 </div>
 
-<!-- Message Box -->
 <div id="messageBox" class="message-box hidden"></div>
 
 <script>
